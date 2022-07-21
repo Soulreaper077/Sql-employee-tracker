@@ -1,7 +1,6 @@
-DROP TABLE IF EXISTS department;
-DROP TABLE IF EXISTS employee; 
-DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS managers; 
+DROP DATABASE IF EXISTS employeesDB;
+CREATE DATABASE employeesDB;
+USE employeesDB
 
 CREATE TABLE department (
     department_id INTEGER AUTO_INCREMENT,
@@ -10,7 +9,7 @@ CREATE TABLE department (
 );
 
 INSERT INTO department(role)
-VALUES ("sales"), ("Engineering"), ("Finance"), ("Legal");
+VALUES ("Sales"), ("Engineering"), ("Finance"), ("Legal");
 
 CREATE TABLE role (
     role_id INT AUTO_INCREMENT,
