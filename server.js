@@ -73,7 +73,7 @@ const view = () => {
 }
 
 function viewAllEmployees(){
-    db.query(`SELECT E.id AS ID, E.first_name AS First, E.last_name AS Last, E.role_id AS Role, R.salary AS Salary, M.last_name AS Manager, D.role AS Department FROM employee E LEFT JOIN employee M On E.manager_id = M.id LEFT JOIN role R ON E.role_id = R.title LEFT JOIN department D ON R. department_id = d.id`, function(err, results) {
+    db.query(`SELECT E.id AS ID, E.first_name AS First, E.last_name AS Last, E.role_id AS Role, R.salary AS Salary, M.last_name AS Manager, D.name AS Department FROM employee E LEFT JOIN employee M On E.manager_id = M.id LEFT JOIN role R ON E.role_id = R.title LEFT JOIN department D ON R. department_id = d.id`, function(err, results) {
         if(err) throw err;
         console.table(results);
         Generate(); 
@@ -86,8 +86,8 @@ const viewByDepartment = () => {
         inquirer
         .prompt([
             {
-                type: "list",
                 name: "choice",
+                type: "rawlist",
                 choices: () => {
                     let choiceArr = [];
                     for(i=0; i< results.length; i++){
@@ -98,8 +98,9 @@ const viewByDepartment = () => {
                 message: "Select department"
             }
         ]).then(function(answer){
+            console.log(answer);
             db.query(
-                `SELECT E.id AS ID, E.first_name AS First, E.last_name AS Last, E.role_id AS Role, R.salary AS Salary, M.last_name AS Mamager, D.role AS Department FROM emoloyee E LEFT JOIN employee M ON E.manager_id = M.id LEFT JOIN role R ON E. role_id = R.title LEFT JOIN department D ON R.department_id = d.id WHERE D.role =?`, [answer.choice], function(err, results)
+                "SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Mamager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN department d ON r.department_id = d.id WHERE d.name =?", [answer.choice], function(err, results)
                 {
                     if(err) throw error;
                     console.table(results);
@@ -117,7 +118,7 @@ const viewByRole = () => {
         .prompt([
             {
                 name: "choice",
-                type: "list",
+                type: "rawlist",
                 choices: () => {
                     let choiceArr = [];
                     for(i=0; i< results.length; i++){
@@ -128,9 +129,9 @@ const viewByRole = () => {
                 message: "Select Role"
             }
         ]).then(function(answer) {
-            
+            console.log(answer.choice);
             db.query(
-                `SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Mamager, d.role AS Department FROM emoloyee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e. role_id = r.title LEFT JOIN department d ON r.department_id = d.id WHERE d.role =?`, [answer.choice], function(err, results)
+                `SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Mamager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN department d ON r.department_id = d.id WHERE e.role_id =?`, [answer.choice], function(err, results)
                 {
                     if(err) throw error;
                     console.table(results);
