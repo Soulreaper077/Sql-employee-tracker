@@ -10,7 +10,7 @@ For Use run Node Server.js
 npm i Inquirer 
 npm i MySQL2
 ## Links 
-![Walkthrough Video](https://drive.google.com/file/d/1IUBXfBMRTIJrRJ8Y4BrGAcXKoiCGOktk/view)
+[Walkthrough Video](https://drive.google.com/file/d/1IUBXfBMRTIJrRJ8Y4BrGAcXKoiCGOktk/view)
 
 ## Contact me 
 [Email](Jesseponce233@gmail.com)
